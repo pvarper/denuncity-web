@@ -11,14 +11,14 @@ const Breadcrumb = ({ pageName }: BreadcrumbProps) => {
         {pageName}
       </h2>
 
-      <nav>
-        <ol className="flex items-center gap-2">
-          <li>
-            <Link to="/">Dashboard /</Link>
-          </li>
-          <li className="text-primary">{pageName}</li>
-        </ol>
-      </nav>
+        <nav>
+            <ol className="flex items-center gap-2">
+                <li>
+                    <Link to="/">Dashboard /</Link>
+                </li>
+                <li className="text-primary">{pageName}</li>
+            </ol>
+        </nav>
     </div>
   );
 };
