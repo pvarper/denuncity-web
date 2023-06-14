@@ -1,12 +1,27 @@
 import React, { useEffect , useState} from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
-import MapLayout from "./MapLayout";
+import MapLayout from "../pages/Maps/MapLayout";
+import {listarAllDenuncias} from "../pages/api/denuncias";
+import axios from "axios/index";
+
+interface DenunciaAllDTO {
+    _id: string;
+    correo: string;
+    titulo: string;
+    descripcion: string;
+    estado: string;
+    lat: string;
+    lon: string;
+    createdAt: Date;
+}
 
 
 
 const Map = () => {
 
     const [map, setMap] = useState<google.maps.Map | null>(null);
+
+
     useEffect(() => {
 
         const initMap = () => {
@@ -19,6 +34,7 @@ const Map = () => {
 
 
             loader.load().then(() => {
+
                 const santacruz = { lat: -17.78629, lng: -63.18117 };
                 const mapElement = document.getElementById('map');
 
@@ -28,7 +44,10 @@ const Map = () => {
                         zoom: 15,
                     });
 
+
+
                     let listaCalor = [];
+
                     listaCalor.push(new google.maps.LatLng(-17.781857522626026, -63.18337826721948));
                     listaCalor.push(new google.maps.LatLng(-17.781862630765033,-63.183056402137694));
                     listaCalor.push(new google.maps.LatLng(-17.781826873788873, -63.18291156285089));
@@ -135,8 +154,21 @@ const Map = () => {
     }, []);
 
 
+
+
     return (
-            <MapLayout/>
+        <div className="grid grid-cols-1 gap-9 sm:grid-cols-1">
+
+            <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                <h3 className="font-medium text-black dark:text-white">
+                    Mapa
+                </h3>
+            </div>
+
+            <div id="map" style={{ height: '400px' }}></div>
+        </div>
+
+
     );
 };
 

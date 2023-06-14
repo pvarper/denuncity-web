@@ -6,7 +6,6 @@ import SignUp from './pages/Authentication/SignUp';
 import Calendar from './pages/Calendar';
 import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
-import Map from './pages/Maps/Map';
 import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
@@ -14,6 +13,7 @@ import Settings from './pages/Settings';
 import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
+import MapLayout from "./pages/Maps/MapLayout";
 
 function App() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -38,7 +38,7 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<ECommerce />} />
-                <Route path="/maps" element={<Map />} />
+                <Route path="/maps" element={<MapLayout />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/forms/form-elements" element={<FormElements />} />
