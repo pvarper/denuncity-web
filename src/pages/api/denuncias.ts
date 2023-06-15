@@ -23,7 +23,7 @@ interface DenunciaAllDTO {
 }
 
 
-export async function listarDenunciasPorGruposTipoDenuncia():Promise<DenunciaPorTipoDTO[]> {
+export async function listarDenunciasPorGruposTipoDenuncia(): Promise<DenunciaPorTipoDTO[]> {
     try {
         const response = await axios.get('http://localhost:3001/denuncias/listarportipo'); // Reemplaza la URL con la de tu API
         //console.log(response.data);
@@ -35,10 +35,22 @@ export async function listarDenunciasPorGruposTipoDenuncia():Promise<DenunciaPor
     }
 }
 
-export async function listarAllDenuncias():Promise<DenunciaAllDTO[]> {
+export async function listarAllDenuncias(
+    estado: string,
+    fechaInicio: string,
+    fechaFin: string,
+    tipoDenuncia: string,
+): Promise<DenunciaAllDTO[]> {
     try {
-        const response = await axios.get('http://localhost:3001/denuncias/listarall'); // Reemplaza la URL con la de tu API
-        //console.log(response.data);
+        const response = await axios.get('http://localhost:3001/denuncias/listarall', {
+            params: {
+                estado: estado,
+                fechaInicio: fechaInicio,
+                fechaFin: fechaFin,
+                tipoDenuncia: tipoDenuncia
+            }
+        });
+
         return response.data;
 
     } catch (error) {
