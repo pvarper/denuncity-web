@@ -19,7 +19,7 @@ interface DenunciaAllDTO {
     estado: string;
     lat: string;
     lon: string;
-    createdAt: Date;
+    createdAt: string;
 }
 
 

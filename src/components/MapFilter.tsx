@@ -28,12 +28,7 @@ const dataEstados: estados[] = [
 ];
 const MapFilter: React.FC = () => {
 
-    const {
-        filtroEstado, setFiltroEstado,
-        fechaInicio, setFechaInicio,
-        fechaFin, setFechaFin,
-        tipoDenuncia,setTipoDenuncia
-    } = useContext(MapContext);
+    const {setFiltroEstado, setFechaInicio, setFechaFin, setTipoDenuncia} = useContext(MapContext);
 
     const handleFiltroEstadoChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const nuevoEstado = event.target.value;
@@ -82,7 +77,6 @@ const MapFilter: React.FC = () => {
                                     <input
                                         type="date"
                                         onChange={handleFechaInicioChange}
-                                        value={fechaInicio}
                                         className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                                     />
                                 </div>
@@ -96,7 +90,6 @@ const MapFilter: React.FC = () => {
                                     <input
                                         type="date"
                                         onChange={handleFechaFinChange}
-                                        value={fechaFin}
                                         className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                                     />
                                 </div>

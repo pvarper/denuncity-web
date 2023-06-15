@@ -14,6 +14,8 @@ import { Route, Routes } from 'react-router-dom';
 // import Alerts from './pages/UiElements/Alerts';
 // import Buttons from './pages/UiElements/Buttons';
 import MapLayout from "./pages/Maps/MapLayout";
+import { MapProvider } from './pages/api/MapContext';
+
 
 function App() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -36,23 +38,25 @@ function App() {
         null
     ) : (
         <>
-            <Routes>
-                {/*todo Uncomment this*/}
-                {/*    <Route path="/" element={<ECommerce />} />*/}
-                <Route path="/" element={<MapLayout/>}/>
-                {/*<Route path="/maps" element={<MapLayout />} />*/}
-                {/*    <Route path="/calendar" element={<Calendar />} />*/}
-                {/*    <Route path="/profile" element={<Profile />} />*/}
-                {/*    <Route path="/forms/form-elements" element={<FormElements />} />*/}
-                {/*    <Route path="/forms/form-layout" element={<FormLayout />} />*/}
-                {/*    <Route path="/tables" element={<Tables />} />*/}
-                {/*    <Route path="/settings" element={<Settings />} />*/}
-                {/*    <Route path="/chart" element={<Chart />} />*/}
-                {/*    <Route path="/ui/alerts" element={<Alerts />} />*/}
-                {/*    <Route path="/ui/buttons" element={<Buttons />} />*/}
-                {/*    <Route path="/auth/signin" element={<SignIn />} />*/}
-                {/*    <Route path="/auth/signup" element={<SignUp />} />*/}
-            </Routes>
+            <MapProvider>
+                <Routes>
+                    {/*todo Uncomment this*/}
+                    {/*    <Route path="/" element={<ECommerce />} />*/}
+                    <Route path="/" element={<MapLayout/>}/>
+                    {/*<Route path="/maps" element={<MapLayout />} />*/}
+                    {/*    <Route path="/calendar" element={<Calendar />} />*/}
+                    {/*    <Route path="/profile" element={<Profile />} />*/}
+                    {/*    <Route path="/forms/form-elements" element={<FormElements />} />*/}
+                    {/*    <Route path="/forms/form-layout" element={<FormLayout />} />*/}
+                    {/*    <Route path="/tables" element={<Tables />} />*/}
+                    {/*    <Route path="/settings" element={<Settings />} />*/}
+                    {/*    <Route path="/chart" element={<Chart />} />*/}
+                    {/*    <Route path="/ui/alerts" element={<Alerts />} />*/}
+                    {/*    <Route path="/ui/buttons" element={<Buttons />} />*/}
+                    {/*    <Route path="/auth/signin" element={<SignIn />} />*/}
+                    {/*    <Route path="/auth/signup" element={<SignUp />} />*/}
+                </Routes>
+            </MapProvider>
         </>
     );
 }

@@ -15,7 +15,7 @@ interface DenunciaAllDTO {
     imagenesUrls: string[];
     lon: string;
     lat: string;
-    createdAt: Date;
+    createdAt: string;
 }
 
 const Map = () => {
@@ -27,6 +27,7 @@ const Map = () => {
     const { filtroEstado, fechaInicio, fechaFin, tipoDenuncia } = useContext(MapContext);
 
     useEffect(() => {
+        console.log(filtroEstado, fechaInicio, fechaFin, tipoDenuncia);
         console.log(" se disparo el cambio de estado en los filtros!!");
 
         const getDenuncias = async () => {
@@ -64,7 +65,7 @@ const Map = () => {
                 });
 
                 denuncias.forEach((denun) => {
-                    const {lon, lat, tipoDenuncia, colorMarker, imagenesUrls, titulo, descripcion} = denun;
+                    const {lon, lat, tipoDenuncia, colorMarker, imagenesUrls, titulo, descripcion, createdAt} = denun;
                     const position = {lat: parseFloat(lat), lng: parseFloat(lon)};
                     const marker = new google.maps.Marker({
                         position: position,
@@ -84,6 +85,7 @@ const Map = () => {
                     <div style=" font-family: Arial, sans-serif; background: #f9f9f9; padding: 15px; border-radius: 8px; width: 400px;">                    
                         <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Título: ${titulo}</h2>        
                         <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Tipo de Denuncia: ${tipoDenuncia}</h2>     
+                        <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Fecha: ${createdAt}</h2>     
                         <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Descripción: ${descripcion}</h2>
                         <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Denunciante: ********</h2>
                         <div style=" display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 10px; ">
