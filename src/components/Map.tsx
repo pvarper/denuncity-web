@@ -21,6 +21,8 @@ const Map = () => {
 
     const [map, setMap] = useState<google.maps.Map | null>(null);
     const [denuncias, setDenuncias] = useState<DenunciaAllDTO[]>([]);
+    const [infoWindow, setInfoWindow] = useState<google.maps.InfoWindow | null>(null);
+
     useEffect(() => {
         const getDenuncias = async () => {
             const denunciasData = await listarAllDenuncias();
@@ -95,13 +97,25 @@ const Map = () => {
                         content: infoWindowContent,
                     });
 
-                    // Añadir un evento de clic al marcador para abrir el InfoWindow.
                     marker.addListener('click', () => {
+                        if (infoWindow) {
+                            infoWindow.close();
+                        }
+
                         infoWindow.open({
                             anchor: marker,
-                            map: map,  // Utilizar la variable `map` local en lugar del estado `map`.
+                            map: map,
                             shouldFocus: false,
                         });
+
+                        setInfoWindow(infoWindow);
+                    });
+
+                    map.addListener('click', () => {
+                        if (infoWindow) {
+                            infoWindow.close();
+                            setInfoWindow(null);
+                        }
                     });
                 })
 
