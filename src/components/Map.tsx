@@ -11,7 +11,7 @@ interface DenunciaAllDTO {
     tipodenuncia: string;
     colorMarker: string;
     estado: string;
-    images: string[];
+    imagenesUrls: string[];
     lon: string;
     lat: string;
     createdAt: Date;
@@ -52,13 +52,13 @@ const Map = () => {
                 });
 
                 denuncias.forEach((denun) => {
-                    var ca=  generarAleatorio();
-                    const {lon, lat, colorMarker} = denun;
+                    var ca = generarAleatorio();
+                    const {lon, lat, colorMarker, imagenesUrls, titulo, descripcion} = denun;
                     const position = {lat: parseFloat(lat), lng: parseFloat(lon)};
-                    new google.maps.Marker({
+                    const marker = new google.maps.Marker({
                         position: position,
-                        map: map,
-                        title: denun.titulo,
+                        map: map,  // Utilizar la variable `map` local en lugar del estado `map`.
+                        title: titulo,
                         icon: {
                             path: google.maps.SymbolPath.CIRCLE,
                             fillColor: ca,
@@ -68,7 +68,29 @@ const Map = () => {
                             scale: 8,
                         }
                     });
-                });
+
+                    // Crear un InfoWindow con los datos de la denuncia.
+                    const infoWindowContent = `
+        <div>
+            <h2>${titulo}</h2>
+            <p>${descripcion}</p>
+            ${imagenesUrls.map(imageUrl => `<img src="${imageUrl}" width="100" />`).join('')}
+        </div>
+    `;
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: infoWindowContent,
+                    });
+
+                    // Añadir un evento de clic al marcador para abrir el InfoWindow.
+                    marker.addListener('click', () => {
+                        infoWindow.open({
+                            anchor: marker,
+                            map: map,  // Utilizar la variable `map` local en lugar del estado `map`.
+                            shouldFocus: false,
+                        });
+                    });
+                })
+
 
                 setMap(map);
             });
