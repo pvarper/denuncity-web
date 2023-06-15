@@ -30,7 +30,8 @@ const MapLayout = () => {
             {/*<Breadcrumb pageName="Map"/>*/}
             <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
                 <MapFilter />
-                <DenunciaTable />
+                {/*todo Uncomment this*/}
+                {/*<DenunciaTable />*/}
             </div>
             <Map />
         </DefaultLayout>

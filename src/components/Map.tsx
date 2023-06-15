@@ -49,6 +49,12 @@ const Map = () => {
                 const map = new google.maps.Map(mapElement, {
                     center: santacruz,
                     zoom: 18,
+                    styles: [
+                        {
+                            featureType: 'poi',
+                            stylers: [{ visibility: 'off' }],
+                        },
+                    ],
                 });
 
                 denuncias.forEach((denun) => {
