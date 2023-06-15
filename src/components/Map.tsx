@@ -60,7 +60,6 @@ const Map = () => {
                 });
 
                 denuncias.forEach((denun) => {
-                    var ca = generarAleatorio();
                     const {lon, lat, tipoDenuncia, colorMarker, imagenesUrls, titulo, descripcion} = denun;
                     const position = {lat: parseFloat(lat), lng: parseFloat(lon)};
                     const marker = new google.maps.Marker({
@@ -69,9 +68,9 @@ const Map = () => {
                         title: titulo,
                         icon: {
                             path: google.maps.SymbolPath.CIRCLE,
-                            fillColor: ca,
+                            fillColor: colorMarker,
                             fillOpacity: 1,
-                            strokeColor: ca,
+                            strokeColor: colorMarker,
                             strokeOpacity: 1,
                             scale: 8,
                         }
