@@ -13,6 +13,7 @@ interface DenunciaAllDTO {
     correo: string;
     titulo: string;
     descripcion: string;
+    tipodenuncia: string;
     estado: string;
     lat: string;
     lon: string;
@@ -35,7 +36,7 @@ export async function listarDenunciasPorGruposTipoDenuncia():Promise<DenunciaPor
 export async function listarAllDenuncias():Promise<DenunciaAllDTO[]> {
     try {
         const response = await axios.get('http://localhost:3001/denuncias/listarall'); // Reemplaza la URL con la de tu API
-        console.log(response.data);
+        //console.log(response.data);
         return response.data;
 
     } catch (error) {

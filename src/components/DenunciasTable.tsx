@@ -18,8 +18,6 @@ const DenunciasTable: React.FC = () => {
             const denunciasData = await listarDenunciasPorGruposTipoDenuncia();
             setDenuncias(denunciasData);
         };
-
-
         getDenuncias();
 
 

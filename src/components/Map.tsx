@@ -1,17 +1,19 @@
-import React, { useEffect , useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
-import MapLayout from "../pages/Maps/MapLayout";
 import {listarAllDenuncias} from "../pages/api/denuncias";
-import axios from "axios/index";
+
+
+
 
 interface DenunciaAllDTO {
     _id: string;
     correo: string;
     titulo: string;
     descripcion: string;
+    tipodenuncia: string;
     estado: string;
-    lat: string;
     lon: string;
+    lat: string;
     createdAt: Date;
 }
 
@@ -19,12 +21,26 @@ interface DenunciaAllDTO {
 
 const Map = () => {
 
+
     const [map, setMap] = useState<google.maps.Map | null>(null);
+
+    const [denuncias, setDenuncias] = useState<DenunciaAllDTO[]>([]);
+    useEffect(() => {
+        const getDenuncias = async () => {
+            const denunciasData = await listarAllDenuncias();
+            setDenuncias(denunciasData);
+        };
+        getDenuncias();
+
+
+    }, []);
+
 
 
     useEffect(() => {
 
         const initMap = () => {
+
 
             const loader = new Loader({
                 apiKey: 'AIzaSyBgTxIfXuFWEByk3cL71ZYQlS4cpM8sgms&libraries=drawing,visualization',
@@ -39,6 +55,7 @@ const Map = () => {
                 const mapElement = document.getElementById('map');
 
                 if (mapElement) {
+
                     const map = new google.maps.Map(mapElement, {
                         center: santacruz,
                         zoom: 15,
@@ -46,7 +63,12 @@ const Map = () => {
 
 
 
-                    let listaCalor = [];
+                    let listaCalor:google.maps.LatLng[]=[];
+                    // console.log(denuncias.length);
+                    // denuncias.forEach((denun) => {
+                    //     console.log("lat:"+Number(denun.lat),"long:"+Number(denun.lon));
+                    //     listaCalor.push(new google.maps.LatLng(Number(denun.lat),Number(denun.lon)));
+                    // })
 
                     listaCalor.push(new google.maps.LatLng(-17.781857522626026, -63.18337826721948));
                     listaCalor.push(new google.maps.LatLng(-17.781862630765033,-63.183056402137694));
