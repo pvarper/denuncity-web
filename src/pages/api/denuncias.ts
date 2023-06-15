@@ -14,6 +14,8 @@ interface DenunciaAllDTO {
     titulo: string;
     descripcion: string;
     tipodenuncia: string;
+    colorMarker: string;
+    images: string[];
     estado: string;
     lat: string;
     lon: string;

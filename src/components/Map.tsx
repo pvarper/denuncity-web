@@ -9,7 +9,9 @@ interface DenunciaAllDTO {
     titulo: string;
     descripcion: string;
     tipodenuncia: string;
+    colorMarker: string;
     estado: string;
+    images: string[];
     lon: string;
     lat: string;
     createdAt: Date;
@@ -28,6 +30,12 @@ const Map = () => {
     }, []);
 
 
+    function generarAleatorio(): string {
+        const colores = ["red", "green", "blue", "yellow", "orange", "purple"];
+        const indiceAleatorio = Math.floor(Math.random() * colores.length);
+        return colores[indiceAleatorio];
+    }
+
     useEffect(() => {
         const initMap = () => {
             const loader = new Loader({
@@ -44,14 +52,23 @@ const Map = () => {
                 });
 
                 denuncias.forEach((denun) => {
-                    const {lon, lat} = denun;
+                    var ca=  generarAleatorio();
+                    const {lon, lat, colorMarker} = denun;
                     const position = {lat: parseFloat(lat), lng: parseFloat(lon)};
                     new google.maps.Marker({
                         position: position,
                         map: map,
                         title: denun.titulo,
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            fillColor: ca,
+                            fillOpacity: 1,
+                            strokeColor: ca,
+                            strokeOpacity: 1,
+                            scale: 8,
+                        }
                     });
-                })
+                });
 
                 setMap(map);
             });
