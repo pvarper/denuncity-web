@@ -8,7 +8,7 @@ interface DenunciaAllDTO {
     correo: string;
     titulo: string;
     descripcion: string;
-    tipodenuncia: string;
+    tipoDenuncia: string;
     colorMarker: string;
     estado: string;
     imagenesUrls: string[];
@@ -48,12 +48,12 @@ const Map = () => {
                 // @ts-ignore
                 const map = new google.maps.Map(mapElement, {
                     center: santacruz,
-                    zoom: 15,
+                    zoom: 18,
                 });
 
                 denuncias.forEach((denun) => {
                     var ca = generarAleatorio();
-                    const {lon, lat, colorMarker, imagenesUrls, titulo, descripcion} = denun;
+                    const {lon, lat, tipoDenuncia, colorMarker, imagenesUrls, titulo, descripcion} = denun;
                     const position = {lat: parseFloat(lat), lng: parseFloat(lon)};
                     const marker = new google.maps.Marker({
                         position: position,
@@ -69,14 +69,22 @@ const Map = () => {
                         }
                     });
 
-                    // Crear un InfoWindow con los datos de la denuncia.
                     const infoWindowContent = `
-        <div>
-            <h2>${titulo}</h2>
-            <p>${descripcion}</p>
-            ${imagenesUrls.map(imageUrl => `<img src="${imageUrl}" width="100" />`).join('')}
-        </div>
-    `;
+                    <div style=" font-family: Arial, sans-serif; background: #f9f9f9; padding: 15px; border-radius: 8px; width: 400px;">                    
+                        <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Título: ${titulo}</h2>        
+                        <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Tipo de Denuncia: ${tipoDenuncia}</h2>     
+                        <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Descripción: ${descripcion}</h2>
+                        <h2 style=" color: #333; font-weight: bold; margin-bottom: 10px; ">Denunciante: ********</h2>
+                        <div style=" display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 10px; ">
+                            ${imagenesUrls.map(imageUrl => `
+                                <a href="${imageUrl}" target="_blank" rel="noopener noreferrer">
+                                    <img src="${imageUrl}" width="80" style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);" />
+                                </a>
+                            `).join('')}
+                        </div>
+                    </div>
+                    `;
+
                     const infoWindow = new google.maps.InfoWindow({
                         content: infoWindowContent,
                     });
@@ -125,7 +133,7 @@ const Map = () => {
                 </h3>
             </div>
 
-            <div id="map" style={{height: '400px'}}></div>
+            <div id="map" style={{height: '800px'}}></div>
         </div>
 
 

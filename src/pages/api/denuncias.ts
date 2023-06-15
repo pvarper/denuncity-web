@@ -13,7 +13,7 @@ interface DenunciaAllDTO {
     correo: string;
     titulo: string;
     descripcion: string;
-    tipodenuncia: string;
+    tipoDenuncia: string;
     colorMarker: string;
     imagenesUrls: string[];
     estado: string;
