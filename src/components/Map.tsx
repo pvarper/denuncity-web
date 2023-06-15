@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Loader} from '@googlemaps/js-api-loader';
 import {listarAllDenuncias} from "../pages/api/denuncias";
+import {MapContext} from "../pages/api/MapContext";
 
 
 interface DenunciaAllDTO {
@@ -23,20 +24,23 @@ const Map = () => {
     const [denuncias, setDenuncias] = useState<DenunciaAllDTO[]>([]);
     const [infoWindow, setInfoWindow] = useState<google.maps.InfoWindow | null>(null);
 
+    const { filtroEstado, fechaInicio, fechaFin, tipoDenuncia } = useContext(MapContext);
+
     useEffect(() => {
+        console.log(" se disparo el cambio de estado en los filtros!!");
+
         const getDenuncias = async () => {
-            const denunciasData = await listarAllDenuncias();
+            const denunciasData = await listarAllDenuncias(
+                filtroEstado,
+                fechaInicio,
+                fechaFin,
+                tipoDenuncia
+            );
             setDenuncias(denunciasData);
         };
         getDenuncias();
-    }, []);
+    }, [filtroEstado, fechaInicio, fechaFin, tipoDenuncia]);
 
-
-    function generarAleatorio(): string {
-        const colores = ["red", "green", "blue", "yellow", "orange", "purple"];
-        const indiceAleatorio = Math.floor(Math.random() * colores.length);
-        return colores[indiceAleatorio];
-    }
 
     useEffect(() => {
         const initMap = () => {
@@ -54,7 +58,7 @@ const Map = () => {
                     styles: [
                         {
                             featureType: 'poi',
-                            stylers: [{ visibility: 'off' }],
+                            stylers: [{visibility: 'off'}],
                         },
                     ],
                 });
@@ -123,8 +127,6 @@ const Map = () => {
             });
         };
 
-
-        // Cargar el script de Google Maps API
         const loader = new Loader({
             apiKey: 'AIzaSyBgTxIfXuFWEByk3cL71ZYQlS4cpM8sgms&libraries=drawing,visualization',
             version: 'weekly',
@@ -140,18 +142,11 @@ const Map = () => {
             });
 
 
-    }, [denuncias]); // agregado denuncias como dependencia del efecto.
+    }, [denuncias]);
 
 
     return (
         <div className="grid grid-cols-1 gap-9 sm:grid-cols-1">
-
-            <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-                <h3 className="font-medium text-black dark:text-white">
-                    Mapa
-                </h3>
-            </div>
-
             <div id="map" style={{height: '800px'}}></div>
         </div>
 
