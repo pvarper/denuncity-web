@@ -1,4 +1,5 @@
-import Breadcrumb from '../../components/Breadcrumb';
+// {/*todo Uncomment this*/}
+// import Breadcrumb from '../../components/Breadcrumb';
 import DefaultLayout from '../../layout/DefaultLayout';
 import DenunciaTable from '../../components/DenunciasTable';
 import Map from "../../components/Map";
@@ -25,7 +26,8 @@ const MapLayout = () => {
 
    return (
         <DefaultLayout>
-            <Breadcrumb pageName="Map"/>
+            {/*todo Uncomment this*/}
+            {/*<Breadcrumb pageName="Map"/>*/}
             <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
                 <MapFilter />
                 <DenunciaTable />
